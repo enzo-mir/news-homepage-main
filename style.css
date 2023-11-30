@@ -1,7 +1,14 @@
 @font-face {
   font-family: inter;
-  src: url(./assets/fonts/static/Inter-Regular.ttf) format("woff"), url(./assets/fonts/static/Inter-Bold.ttf) format("woff"),
-    url(./assets/fonts/static/Inter-ExtraBold.ttf) format("woff");
+  src: url(./assets/fonts/static/Inter-Regular.ttf) format("woff");
+}
+@font-face {
+  font-family: inter-bold;
+  src: url(./assets/fonts/static/Inter-Bold.ttf) format("woff");
+}
+@font-face {
+  font-family: inter-extra-bold;
+  src: url(./assets/fonts/static/Inter-ExtraBold.ttf) format("woff");
 }
 
 *,
@@ -17,4 +24,327 @@ body {
   width: 100%;
   height: 100%;
   font-family: inter;
+}
+
+body {
+  height: 100svh;
+  padding-block: 3em;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+
+  & div.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 150%;
+    animation: overlay 0.5s ease-out forwards;
+  }
+}
+
+@keyframes overlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+p {
+  font-size: clamp(13px, 1vw, 15px);
+}
+
+header,
+main,
+footer {
+  position: relative;
+  padding-inline: 10%;
+  width: 100%;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  height: clamp(100px, 10vh, 125px);
+
+  & li {
+    list-style-type: none;
+    & > a {
+      text-decoration: none;
+      color: hsl(236, 13%, 42%);
+      &:hover {
+        color: hsl(5, 85%, 63%);
+      }
+    }
+  }
+
+  & > nav > ul {
+    display: flex;
+    gap: 3em;
+  }
+
+  & > span#burgerMenu {
+    display: none;
+    width: 30px;
+    height: 30px;
+    background-image: url(./assets/images/icon-menu.svg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    transform: rotate(0deg);
+    transition: all 0.2s ease-out;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &.open {
+      background-image: url(./assets/images/icon-menu-close.svg);
+      transform: rotate(180deg);
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    & > span#burgerMenu {
+      display: block;
+      z-index: 55;
+    }
+    & > nav {
+      position: absolute;
+      right: 0px;
+      top: -3em;
+      z-index: 50;
+      background-color: #fff;
+      height: 100svh;
+      transition: all 0.5s ease-out;
+      width: 0%;
+      overflow: hidden;
+      &.display {
+        width: 75%;
+      }
+
+      & > ul {
+        position: absolute;
+        left: 50px;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+        & > li {
+          & > a {
+            color: black;
+            font-size: larger;
+          }
+        }
+      }
+    }
+  }
+}
+
+button {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+  padding: 1em 2.5em;
+  background: hsl(5, 85%, 63%);
+  border: none;
+  color: white;
+  font-family: inter-bold;
+  text-transform: uppercase;
+  transition: all 0.3s ease-out;
+  letter-spacing: 0.25ch;
+
+  &:hover {
+    cursor: pointer;
+    background: #000;
+  }
+}
+
+main {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 1fr calc(100% / 3);
+  grid-template-rows: 1fr 25%;
+  gap: 3em 2em;
+
+  & > section {
+    height: 100%;
+    width: 100%;
+    &:first-child {
+      display: grid;
+      grid-template-rows: 1fr auto;
+      gap: 2em;
+      & > div[role="img"] {
+        background-image: url(./assets/images/image-web-3-desktop.jpg);
+        background-size: cover;
+        background-position: center;
+      }
+
+      & > article {
+        display: flex;
+        gap: 3em;
+        & > h1 {
+          font-family: inter-extra-bold;
+          font-size: clamp(1.5em, 4vw, 3em);
+        }
+
+        & > div {
+          display: grid;
+          align-content: space-between;
+
+          & > p {
+            color: hsl(236, 13%, 42%);
+            line-height: 2.5ch;
+            font-size: clamp(13px, 0.9vw, 18px);
+          }
+        }
+      }
+    }
+    &:nth-child(2) {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: #000;
+      color: white;
+      padding: 2em;
+      & > h2 {
+        color: hsl(35, 77%, 62%);
+        font-size: 2.25em;
+      }
+
+      & > article {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1em;
+        height: 100%;
+        padding-block: 1em;
+        &:last-child {
+          padding-block-end: 0;
+        }
+
+        &:not(:last-child) {
+          border-bottom: 1px solid hsl(236, 13%, 42%);
+        }
+        & > h3 {
+          &:hover {
+            color: hsl(35, 77%, 62%);
+            cursor: pointer;
+          }
+        }
+
+        & > p {
+          color: hsl(236, 13%, 42%);
+          line-height: 2.5ch;
+        }
+      }
+    }
+    &:last-child {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-area: 2 / 1 / 3 / 3;
+      gap: 1em;
+
+      & > article {
+        display: grid;
+        align-items: center;
+        grid-template-columns: auto 1fr;
+        gap: 1em;
+        grid-template-rows: repeat(3, 1fr);
+        width: 100%;
+        overflow: hidden;
+        & > span {
+          font-size: 2em;
+          font-family: inter-bold;
+          color: hsl(233, 8%, 79%);
+        }
+        & > h3 {
+          font-family: inter-bold;
+          &:hover {
+            color: hsl(5, 85%, 63%);
+            cursor: pointer;
+          }
+        }
+        & > p {
+          color: hsl(236, 13%, 42%);
+          line-height: 2.5ch;
+        }
+        & img {
+          min-width: 100%;
+          max-height: 100%;
+          grid-area: 1 / 1 / 4 / 2;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 1000px) {
+    grid-template-columns: 100%;
+    grid-auto-flow: column;
+    grid-template-rows: none;
+    padding-block-end: 10%;
+    padding-inline: 10%;
+
+    & > section {
+      &:first-child {
+        min-height: 40vh;
+
+        & > article {
+          gap: 1em;
+          & > div {
+            gap: 2em;
+          }
+        }
+      }
+      &:last-child {
+        grid-area: 3 / 1 / 4 / 3;
+        grid-template-columns: 1fr;
+        gap: 3em;
+
+        & > article {
+          grid-template-rows: 1fr auto auto;
+          width: 100%;
+          height: 150px;
+        }
+      }
+      &:nth-child(2) {
+        height: fit-content;
+        & > h2 {
+          grid-area: 1 / 1 / 2 / 4;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    & > section {
+      &:first-child {
+        min-height: 50svh;
+        grid-template-rows: 50% 50%;
+        gap: 1em;
+        & > div[role="img"] {
+          background-image: url(./assets/images/image-web-3-mobile.jpg);
+        }
+        & > article {
+          flex-direction: column;
+          & > div {
+            gap: 1em;
+          }
+        }
+      }
+
+      &:last-child {
+        & > article {
+          grid-template-rows: auto auto 1fr;
+          align-items: start;
+          row-gap: 0;
+        }
+      }
+    }
+  }
 }
