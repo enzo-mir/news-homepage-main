@@ -209,7 +209,7 @@ main {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      background: #000;
+      background: hsl(240, 100%, 5%);
       color: white;
       padding: 2em;
       & > h2 {
