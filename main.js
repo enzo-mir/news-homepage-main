@@ -15,14 +15,13 @@ burgerBtn.addEventListener("click", (e) => {
     document.body.removeChild(document.querySelector(".overlay"));
   });
 
-  document.body.addEventListener("click", () => {
-    nav.classList.remove("display");
-    e.target.classList.remove("open");
-    document.body.removeChild(document.querySelector(".overlay"));
-  });
-
   if (nav.classList.contains("display")) {
     document.body.prepend(elem);
+    document.body.addEventListener("click", () => {
+      nav.classList.remove("display");
+      e.target.classList.remove("open");
+      document.body.removeChild(document.querySelector(".overlay"));
+    });
   } else {
     document.body.removeChild(document.querySelector(".overlay"));
   }
